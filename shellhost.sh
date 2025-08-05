@@ -94,7 +94,31 @@ while true; do
             ;;
         6)
             echo ">> Managing backups..."
-            # مدیریت بکاپ
+            sleep 2
+            echo "  ------------------------------------------------ "
+            echo "  - Backup Management Options -"
+            echo "  1. Google Drive Store : (Store backups on Google Drive)"
+            echo "  2. Local Store : (Store backups on the local device via FTP)"
+            echo "  ------------------------------------------------ "
+            read -p "Enter your choice (1-2): " backup_choice
+            case $backup_choice in
+                1)
+                    echo ">> Setting up Google Drive backup..."
+                    # Implement Google Drive backup logic here
+                    ;;
+                2)
+                    echo ">> Setting up local backup via FTP..."
+                    output=$(python3 FTPclient.py)
+                    if [[ "$output" == *"Done"* ]]; then
+                        echo ">> Local backup completed successfully."
+                    else
+                        echo "❌ FTP client failed."
+                    fi
+                    ;;
+                *)
+                    echo "Invalid choice. Please select 1 or 2."
+                    ;;
+            esac
             ;;
         7)
             echo ">> Exiting. Goodbye!"
